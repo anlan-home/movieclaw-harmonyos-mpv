@@ -1,0 +1,32 @@
+--- a/video/out/hwdec/hwdec_ohcodec.c
++++ b/video/out/hwdec/hwdec_ohcodec.c
+@@ -135,6 +135,8 @@
+     };
+     if (!p->hwctx.av_device_ref) {
+         p->interop->owner_uninit(hw);
++        p->interop = NULL;
++        p->surface = NULL;
+         return -1;
+     }
+     hwdec_devices_add(hw->devs, &p->hwctx);
+@@ -144,10 +146,20 @@
+ static void uninit(struct ra_hwdec *hw)
+ {
+     struct ohcodec_priv *p = hw->priv;
++    // ra_hwdec_load_driver calls uninit even when init() failed before any
++    // interop was created (e.g. GL without GL_EXT_YUV_target): p->interop is
++    // NULL there and dereferencing it crashed the vo thread (SIGSEGV@0x0).
++    if (!p->interop) {
++        return;
++    }
+     hwdec_devices_remove(hw->devs, &p->hwctx);
+     // Decoder and device disappear before listener/NativeImage/GPU objects.
+     av_buffer_unref(&p->hwctx.av_device_ref);
+     p->interop->owner_uninit(hw);
++    // init() may already have torn the interop down when the device ref
++    // failed; a second owner_uninit from here would double-free it.
++    p->interop = NULL;
++    p->surface = NULL;
+ }
+ 
+ static int mapper_init(struct ra_hwdec_mapper *mapper)
