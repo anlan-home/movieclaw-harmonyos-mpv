@@ -2,3 +2,4 @@
 *.sh text eol=lf
 *.md text eol=lf
 *.so binary
+SHA256SUMS text eol=lf
