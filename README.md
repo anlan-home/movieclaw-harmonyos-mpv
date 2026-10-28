@@ -43,12 +43,21 @@ arm64-v8a / x86_64 预编译 `libmpv.so`。这里不包含 HarmonyOS App 业务�
    - 另有 `remove-unnecessary-atomic-test.patch`，去掉构建机上的原子性探测。
 3. **x86_64 构建**：`crossfiles/amd64-crossfile-linux.ini`、`ARCH=amd64`，用于 x86_64 模拟器；
    arm64-v8a 用于真机。
-4. **预编译库**：`prebuilts/arm64-v8a/libmpv.so`、`prebuilts/x86_64/libmpv.so`，
-   是当前补丁/依赖构建出的 stripped 产物（校验见 `prebuilts/SHA256SUMS`）。
+4. **预编译产物**：两个 ABI 的 `libmpv.so`、`libmpvbridge.so`（NAPI 桥）与
+   `prebuilts/include/mpv/` 头文件；校验见 `prebuilts/SHA256SUMS`。
 
 ## 仓库结构
 
-
+```text
+build.sh / bundle.sh / download.sh / patch.sh   构建入口
+download/ / scripts/ / crossfiles/              依赖下载与交叉编译
+patches/mpv/                                     ohcodec 空指针修复
+patches/libplacebo/                              GLES 外部 YUV/P010
+bridge/                                          NAPI 桥源码 + CMake
+prebuilts/<abi>/                                 libmpv.so / libmpvbridge.so
+prebuilts/include/mpv/                           libmpv 头文件
+SOURCES.md / THIRD_PARTY.md                      上游来源与许可证
+```
 
 ## 构建
 
