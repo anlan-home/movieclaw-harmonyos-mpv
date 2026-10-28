@@ -2,3 +2,4 @@
 libmpv
 *.zip
 *.log
+dist/
