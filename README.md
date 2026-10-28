@@ -46,6 +46,10 @@ arm64-v8a / x86_64 预编译 `libmpv.so`。这里不包含 HarmonyOS App 业务�
 4. **预编译库**：`prebuilts/arm64-v8a/libmpv.so`、`prebuilts/x86_64/libmpv.so`，
    是当前补丁/依赖构建出的 stripped 产物（校验见 `prebuilts/SHA256SUMS`）。
 
+## 仓库结构
+
+
+
 ## 构建
 
 环境：Linux 或 WSL（Windows 原生不支持）；需要 git/make/python3/meson/gperf/pkg-config/nasm。

@@ -1,2 +1,4 @@
 481f92521c5179a7ddbb9d112ddfe8008841c1a417a09a6dba4da5ead697b9e7 *prebuilts/arm64-v8a/libmpv.so
+328047ac02c5953c8fb88a4e38239f21a9fa0aadcce81fe3cbadfb53384143b2 *prebuilts/arm64-v8a/libmpvbridge.so
 dac307cb67cf51eb75bed9d95feb95550098ebc6668050ffbf7522f23a9a1eed *prebuilts/x86_64/libmpv.so
+98748dfe1a1069245cfdd993ac2145340653d80d6ccfcf0d63e628f1629074cf *prebuilts/x86_64/libmpvbridge.so
